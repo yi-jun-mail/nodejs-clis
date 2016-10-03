@@ -1,21 +1,44 @@
 {
-  "name": "clis",
-  "version": "1.0.0",
+  "name": "nodejs-clis",
+  "version": "1.1.0",
   "description": "A collection of CLI utilities",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon  --exec 'babel-node -- ./' -- ",
+    "once": "babel-node -- ./",
+    "test": "mocha --compilers js:babel-register test/spec",
+    "dev": "run-p start watch:test watch:lint",
+    "clean": "rimraf dist",
+    "lint": "eslint ./",
+    "build": "babel ./ -o dist",
+    "watch:test": "nodemon --exec \"npm test || true\"",
+    "watch:lint": "nodemon --exec \"npm run lint || true\""
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/CrabDude/nodejs-clis-starter.git"
+    "url": "git://github.com/CrabDude/nodejs-clis.git"
   },
   "author": "Adam Crabtree",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CrabDude/nodejs-clis/issues"
+  },
+  "homepage": "https://github.com/CrabDude/nodejs-clis#readme",
   "dependencies": {
-    "co": "^4.6.0",
-    "safeguards": "0.0.3",
-    "songbird": "^1.0.2",
+    "babel-cli": "^6.16.0",
+    "babel-preset-nodev6": "^1.0.0",
+    "babel-register": "^6.14.0",
+    "nodemon": "^1.10.2",
+    "npm-run-all": "^3.1.0",
+    "songbird": "^1.0.4",
     "trycatch": "^1.5.21"
+  },
+  "devDependencies": {
+    "rimraf": "^2.5.4",
+    "babel-eslint": "^7.0.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.7.0",
+    "eslint-config-noderiety": "^1.1.1",
+    "mocha": "^3.0.2"
   }
 }
